@@ -1,7 +1,5 @@
 pipeline{
-    agent{
-        label "docker"
-    }
+    agent any
     environment{
     DOCKER_TAG = getDockerTag()
     }
@@ -24,7 +22,7 @@ pipeline{
                 sh "chmod +x changeTag.sh"
                 sh "./chnageTag.sh ${DOCKER_TAG}"
                 sshagent(['k8s-machine']) {
-                    sh "scp -o strctHostkeychecking=no services.yaml node-app-deploy.yaml ec2-user@0.0.0.0:/home/ec2-user/ "
+                    sh "scp -o strctHostkeychecking=no service.yaml node-app-deploy.yaml ec2-user@0.0.0.0:/home/ec2-user/ "
                     script{
                         try{
                             sh "ssh ec2-user@0.0.0.0 kubectl apply -f ."
