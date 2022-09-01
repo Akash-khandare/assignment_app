@@ -25,9 +25,9 @@ pipeline{
                     sh "scp -o strctHostkeychecking=no service.yaml node-app-deploy.yaml ec2-user@0.0.0.0:/home/ec2-user/ "
                     script{
                         try{
-                            sh "ssh ec2-user@0.0.0.0 kubectl apply -f ."
+                            sh "ssh ec2-user@35.77.107.125 kubectl apply -f ."
                         }catch(error){
-                            sh "ssh ec2-user@0.0.0.0 kubectl create -f ."
+                            sh "ssh ec2-user@35.77.107.125 kubectl create -f ."
                         }
                     }
                 }
