@@ -11,10 +11,10 @@ pipeline{
         }
         stage('Dockerhub push'){
             steps{
-                withCredentials( [string(credentialsID: 'docker-hub', variable: 'dockerHubPwd')]){
+                withCredentials([string(credentialsID: 'docker-hub', variable: 'dockerHubPwd')]){
                     sh "docker login -u akashkhandare -p ${dockerHubPwd}"
                     sh "docker push akashkhandare/node:${DOCKER_TAG}"
-                }
+                }                    
             }
         }
         stage('Deploy to k8s'){
